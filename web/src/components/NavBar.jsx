@@ -13,10 +13,10 @@ export default function NavBar() {
             <Divider />
             <NavSections>
                 <NavSection label="General">
-                    <NavLink to="/exams" icon={<Pencil />}>
+                    <NavLink to="/exam" icon={<Pencil />}>
                         Exam
                     </NavLink>
-                    <NavLink to="/examinees" icon={<User />}>
+                    <NavLink to="/examinee" icon={<User />}>
                         Examinee
                     </NavLink>
                 </NavSection>

@@ -4,6 +4,7 @@ import { darkTheme } from '@strapi/design-system/themes';
 
 import LayoutMain from './layouts/Main';
 import PageHome from './pages/Home';
+import PageExaminee from './pages/Examine';
 
 export default function App() {
     return (
@@ -12,6 +13,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<LayoutMain />}>
                         <Route index element={<PageHome />} />
+                        <Route path="/examinee" element={<PageExaminee />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
