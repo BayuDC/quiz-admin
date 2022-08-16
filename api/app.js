@@ -9,6 +9,7 @@ fastify.register(require('@fastify/sensible'));
 fastify.register(require('./plugins/state'));
 fastify.register(require('./plugins/error'));
 
+fastify.register(require('./routes/class'));
 fastify.get('/', () => ({
     message: 'Hello World',
 }));
