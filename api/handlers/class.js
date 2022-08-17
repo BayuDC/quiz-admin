@@ -62,7 +62,7 @@ module.exports = {
         const { class: classOld } = req.state;
         try {
             const classNew = await prisma.class.update({
-                where: { id: parseInt(classOld.id) },
+                where: { id: classOld.id },
                 data: { name },
             });
             reply.send({ class: classNew });
@@ -78,7 +78,7 @@ module.exports = {
         const { class: kurasu } = req.state;
         try {
             await prisma.class.delete({
-                where: { id: parseInt(kurasu.id) },
+                where: { id: kurasu.id },
             });
             reply.status(204).send();
         } catch (err) {
