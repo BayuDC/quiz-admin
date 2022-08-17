@@ -1,3 +1,5 @@
+const handler = require('../handlers/class');
+const schema = require('../schemas/class');
 /**
  * @param {import('fastify').FastifyInstance} fastify
  * @param {import('fastify').FastifyPluginOptions} options
@@ -5,19 +7,24 @@
  */
 module.exports = function (fastify, options, done) {
     fastify.get('/classes', {
-        handler: () => {},
+        handler: handler.index,
     });
     fastify.get('/classes/:id', {
-        handler: () => {},
+        preHandler: handler.load,
+        handler: handler.show,
     });
-    fastify.post('/classes/', {
-        handler: () => {},
+    fastify.post('/classes', {
+        handler: handler.store,
+        schema,
     });
     fastify.put('/classes/:id', {
-        handler: () => {},
+        preHandler: handler.load,
+        handler: handler.update,
+        schema,
     });
     fastify.delete('/classes/:id', {
-        handler: () => {},
+        preHandler: handler.load,
+        handler: handler.destroy,
     });
 
     done();
