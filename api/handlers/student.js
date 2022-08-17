@@ -5,10 +5,10 @@ module.exports = {
      * @param {import('fastify').FastifyReply} reply
      */
     async load(req, reply) {
-        const { id } = req.params;
+        const { studentId } = req.params;
         try {
             const student = await prisma.student.findUnique({
-                where: { id: parseInt(id) || 0 },
+                where: { id: parseInt(studentId) || 0 },
             });
 
             if (!student) return reply.notFound('Student not found');

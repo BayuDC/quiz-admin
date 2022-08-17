@@ -9,7 +9,7 @@ module.exports = function (fastify, options, done) {
     fastify.get('/classes', {
         handler: handler.index,
     });
-    fastify.get('/classes/:id', {
+    fastify.get('/classes/:classId', {
         preHandler: handler.load,
         handler: handler.show,
     });
@@ -17,12 +17,12 @@ module.exports = function (fastify, options, done) {
         handler: handler.store,
         schema,
     });
-    fastify.put('/classes/:id', {
+    fastify.put('/classes/:classId', {
         preHandler: handler.load,
         handler: handler.update,
         schema,
     });
-    fastify.delete('/classes/:id', {
+    fastify.delete('/classes/:classId', {
         preHandler: handler.load,
         handler: handler.destroy,
     });

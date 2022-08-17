@@ -6,9 +6,9 @@ module.exports = {
      * @param {import('fastify').FastifyReply} reply
      */
     async load(req, reply) {
-        const { id } = req.params;
+        const { classId } = req.params;
         try {
-            const kurasu = await prisma.class.findUnique({ where: { id: parseInt(id) || 0 } });
+            const kurasu = await prisma.class.findUnique({ where: { id: parseInt(classId) || 0 } });
 
             if (!kurasu) {
                 return reply.notFound('Class not found');
