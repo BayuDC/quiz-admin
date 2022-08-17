@@ -10,6 +10,7 @@ fastify.register(require('./plugins/state'));
 fastify.register(require('./plugins/error'));
 
 fastify.register(require('./routes/class'));
+fastify.register(require('./routes/student'));
 fastify.get('/', () => ({
     message: 'Hello World',
 }));
