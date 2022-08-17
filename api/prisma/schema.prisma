@@ -21,6 +21,7 @@ model Class {
 
 model Student {
   id       Int    @id @default(autoincrement())
+  no       Int
   fullname String
   username String @unique
   password String

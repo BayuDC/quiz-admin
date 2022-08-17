@@ -8,13 +8,13 @@ module.exports = {
     async load(req, reply) {
         const { id } = req.params;
         try {
-            const class$ = await prisma.class.findUnique({ where: { id: parseInt(id) || 0 } });
+            const kurasu = await prisma.class.findUnique({ where: { id: parseInt(id) || 0 } });
 
-            if (!class$) {
+            if (!kurasu) {
                 return reply.notFound('Class not found');
             }
 
-            req.state.class$ = class$;
+            req.state.class = kurasu;
         } catch (err) {
             reply.badRequest(err.message);
         }
@@ -36,10 +36,7 @@ module.exports = {
      * @param {import('fastify').FastifyReply} reply
      */
     async show(req, reply) {
-        const { class$ } = req.state;
-        reply.send({
-            class: class$,
-        });
+        reply.send({ class: req.state.class });
     },
     /**
      * @param {import('fastify').FastifyRequest} req
@@ -48,10 +45,10 @@ module.exports = {
     async store(req, reply) {
         const { name } = req.body;
         try {
-            const class$ = await prisma.class.create({
+            const kurasu = await prisma.class.create({
                 data: { name },
             });
-            reply.status(201).send({ class: class$ });
+            reply.status(201).send({ class: kurasu });
         } catch (err) {
             reply.badRequest(err.message);
         }
@@ -62,10 +59,10 @@ module.exports = {
      */
     async update(req, reply) {
         const { name } = req.body;
-        const { class$ } = req.state;
+        const { class: classOld } = req.state;
         try {
             const classNew = await prisma.class.update({
-                where: { id: parseInt(class$.id) },
+                where: { id: parseInt(classOld.id) },
                 data: { name },
             });
             reply.send({ class: classNew });
@@ -78,10 +75,10 @@ module.exports = {
      * @param {import('fastify').FastifyReply} reply
      */
     async destroy(req, reply) {
-        const { class$ } = req.state;
+        const { class: kurasu } = req.state;
         try {
             await prisma.class.delete({
-                where: { id: parseInt(class$.id) },
+                where: { id: parseInt(kurasu.id) },
             });
             reply.status(204).send();
         } catch (err) {
