@@ -12,18 +12,18 @@ module.exports = function (fastify, options, done) {
     });
     fastify.get('/students/:id', {
         preHandler: handler.load,
-        handler: handler.store,
+        handler: handler.show,
     });
-    fastify.get('/students', {
+    fastify.post('/students', {
         handler: handler.store,
         schema,
     });
-    fastify.put('/students', {
+    fastify.put('/students/:id', {
         preHandler: handler.load,
         handler: handler.update,
         schema,
     });
-    fastify.get('/students', {
+    fastify.delete('/students/:id', {
         preHandler: handler.load,
         handler: handler.destroy,
     });
