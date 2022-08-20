@@ -6,6 +6,7 @@
     "start": "node app",
     "dev": "node -r dotenv/config app",
     "db:push": "prisma db push",
+    "db:seed": "prisma db seed",
     "db:flush": "prisma db push --force-reset"
   },
   "license": "MIT",
@@ -19,5 +20,8 @@
   "devDependencies": {
     "dotenv": "^16.0.1",
     "prisma": "^4.2.1"
+  },
+  "prisma": {
+    "seed": "node prisma/seed"
   }
 }
