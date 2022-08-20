@@ -5,7 +5,7 @@ module.exports = fp(function (fastify, options, done) {
     fastify.setErrorHandler((err, req, reply) => {
         if (err instanceof yup.ValidationError) {
             return reply.status(422).send({
-                message: 'Invalid data',
+                message: 'Validation error',
                 detail: err.inner.reduce((result, { path, message }) => {
                     result[path] = message;
                     return result;

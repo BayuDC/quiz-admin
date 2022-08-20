@@ -10,7 +10,10 @@ module.exports = {
         classId: yup.number().required('The class field is required'),
     }),
     bodyAsync: yup.object({
-        classId: yup.mixed().test('is-exist', 'This class does not exist', async value => {
+        username: yup.mixed().test('unique', 'A student with this username already exists', async value => {
+            return !(await prisma.student.count({ where: { username: value } }));
+        }),
+        classId: yup.mixed().test('exists', 'This class does not exist', async value => {
             return await prisma.class.count({ where: { id: value } });
         }),
     }),
