@@ -1,9 +1,7 @@
+const yup = require('yup');
+
 module.exports = {
-    body: {
-        type: 'object',
-        required: ['name'],
-        properties: {
-            name: { type: 'string' },
-        },
-    },
+    body: yup.object({
+        name: yup.string().required('The name field is required'),
+    }),
 };

@@ -1,5 +1,6 @@
 const handler = require('../handlers/class');
 const schema = require('../schemas/class');
+
 /**
  * @param {import('fastify').FastifyInstance} fastify
  * @param {import('fastify').FastifyPluginOptions} options

@@ -13,7 +13,8 @@
     "@fastify/sensible": "^5.1.0",
     "@prisma/client": "^4.2.1",
     "fastify": "^4.4.0",
-    "fastify-plugin": "^4.2.0"
+    "fastify-plugin": "^4.2.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
