@@ -15,11 +15,12 @@ module.exports = function (fastify, options, done) {
         handler: handler.show,
     });
     fastify.post('/students', {
+        preHandler: [fastify.validateAsync(schema)],
         handler: handler.store,
         schema,
     });
     fastify.put('/students/:studentId', {
-        preHandler: handler.load,
+        preHandler: [fastify.validateAsync(schema), handler.load],
         handler: handler.update,
         schema,
     });

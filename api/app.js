@@ -8,6 +8,7 @@ const fastify = Fastify();
 fastify.register(require('@fastify/sensible'));
 fastify.register(require('./plugins/state'));
 fastify.register(require('./plugins/error'));
+fastify.register(require('./plugins/valid'));
 
 fastify.register(require('./routes/class'));
 fastify.register(require('./routes/student'));

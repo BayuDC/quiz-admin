@@ -2,22 +2,6 @@ const yup = require('yup');
 const fp = require('fastify-plugin');
 
 module.exports = fp(function (fastify, options, done) {
-    fastify.setValidatorCompiler(({ schema }) => {
-        return data => {
-            try {
-                const value = schema.validateSync(data, {
-                    strict: false,
-                    abortEarly: false,
-                    stripUnknown: true,
-                    recursive: true,
-                });
-                return { value };
-            } catch (error) {
-                return { error };
-            }
-        };
-    });
-
     fastify.setErrorHandler((err, req, reply) => {
         if (err instanceof yup.ValidationError) {
             return reply.status(422).send({
