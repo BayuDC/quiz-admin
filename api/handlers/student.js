@@ -22,8 +22,9 @@ module.exports = {
      * @param {import('fastify').FastifyReply} reply
      */
     async index(req, reply) {
+        const { filter } = req.state;
         try {
-            const students = await prisma.student.findMany();
+            const students = await prisma.student.findMany({ where: filter });
             reply.send({ students });
         } catch (err) {
             reply.badRequest(err.message);
