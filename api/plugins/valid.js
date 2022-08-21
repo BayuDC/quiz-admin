@@ -1,3 +1,4 @@
+const yup = require('yup');
 const fp = require('fastify-plugin');
 
 module.exports = fp(function (fastify, options, done) {
@@ -11,6 +12,9 @@ module.exports = fp(function (fastify, options, done) {
     fastify.setValidatorCompiler(({ schema }) => {
         return data => {
             try {
+                if (!data || !yup.object().isValidSync(data)) {
+                    throw new Error('Please send a valid JSON body');
+                }
                 const value = schema.validateSync(data, yupOptions);
                 return { value };
             } catch (error) {

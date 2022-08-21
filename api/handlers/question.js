@@ -11,6 +11,7 @@ module.exports = {
                 where: { id: parseInt(questionId) || 0 },
                 include: { choices: true },
             });
+            if (!question) return reply.notFound('Question not found');
             req.state.question = question;
         } catch (err) {
             reply.badRequest(err.message);

@@ -11,6 +11,7 @@ module.exports = {
             const task = await prisma.task.findUnique({
                 where: { id: parseInt(taskId) || 0 },
             });
+            if (!task) return reply.notFound('Task not found');
             req.state.task = task;
         } catch (err) {
             reply.badRequest(err.message);
@@ -81,6 +82,7 @@ module.exports = {
             await prisma.task.delete({
                 where: { id: task.id },
             });
+            reply.status(204).send();
         } catch (err) {
             reply.badRequest(err.message);
         }

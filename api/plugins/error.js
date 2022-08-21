@@ -10,6 +10,7 @@ module.exports = fp(function (fastify, options, done) {
                     result[path] = message;
                     return result;
                 }, {}),
+                raw: err,
             });
         }
         reply.status(err.statusCode || 500);
