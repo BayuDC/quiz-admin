@@ -5,6 +5,7 @@ const host = process.env.APP_HOST || '127.0.0.1';
 
 const fastify = Fastify();
 
+fastify.register(require('@fastify/cors'));
 fastify.register(require('@fastify/sensible'));
 fastify.register(require('./plugins/state'));
 fastify.register(require('./plugins/error'));
