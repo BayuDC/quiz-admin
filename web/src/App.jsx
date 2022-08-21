@@ -8,6 +8,8 @@ import LayoutExaminee from './layouts/Examinee';
 import PageHome from './pages/Home';
 import PageExam from './pages/Exam';
 import PageExaminee from './pages/examinee/Index';
+import PageExamineeCreate from './pages/examinee/Create';
+import PageExamineeUpdate from './pages/examinee/Update';
 
 export default function App() {
     return (
@@ -19,6 +21,8 @@ export default function App() {
                         <Route path="/exam" element={<PageExam />} />
                         <Route path="/examinee" element={<LayoutExaminee />}>
                             <Route path="/examinee/:id" element={<PageExaminee />} />
+                            <Route path="/examinee/:id/create" element={<PageExamineeCreate />} />
+                            <Route path="/examinee/:id/update" element={<PageExamineeUpdate />} />
                             <Route index />
                         </Route>
                     </Route>

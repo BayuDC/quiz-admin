@@ -29,7 +29,7 @@ export default function Examinee() {
                     <HeaderLayout
                         title={kurasu.name + "'s Students"}
                         primaryAction={
-                            <LinkButton to={`/examinee/${id}/new`} startIcon={<Plus />}>
+                            <LinkButton to={`/examinee/${id}/create`} startIcon={<Plus />}>
                                 Add new student
                             </LinkButton>
                         }
