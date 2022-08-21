@@ -10,17 +10,17 @@ module.exports = function (fastify, options, done) {
     fastify.get('/questions', {
         handler: handler.index,
     });
-    fastify.get('/questions/:questionid', {
+    fastify.get('/questions/:questionId', {
         preHandler: handler.load,
         handler: handler.show,
     });
     fastify.post('/questions', {
-        preHandler: fastify.validateAsync(schema),
+        preHandler: [fastify.validateAsync(schema)],
         handler: handler.store,
         schema,
     });
-    fastify.put('/questions/:questionid', {
-        preHandler: [handler.load, fastify.validateAsync(schema)],
+    fastify.put('/questions/:questionId', {
+        preHandler: [fastify.validateAsync(schema), handler.load],
         handler: handler.update,
         schema,
     });
