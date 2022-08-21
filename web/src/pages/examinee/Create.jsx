@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { HeaderLayout, ContentLayout } from '@strapi/design-system/Layout';
+import { NumberInput } from '@strapi/design-system/NumberInput';
 import { TextInput } from '@strapi/design-system/TextInput';
 import { Button } from '@strapi/design-system/Button';
 import { Link } from '@strapi/design-system/Link';
@@ -11,7 +12,10 @@ import axios from '../../lib/axios';
 
 export default function ExamineeCreate() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [kurasu, setClass] = useState();
+    const [no, setNo] = useState();
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         axios.get('/classes/' + id).then(({ data }) => {
@@ -19,8 +23,27 @@ export default function ExamineeCreate() {
         });
     }, [id]);
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        setErrors({});
+
+        axios
+            .post('/classes/' + id + '/students', {
+                no,
+                fullname: e.target.fullname.value,
+                username: e.target.username.value,
+                password: e.target.password.value,
+            })
+            .then(() => {
+                navigate('/examinee/' + id);
+            })
+            .catch(err => {
+                setErrors(err.response.data.detail);
+            });
+    };
+
     return (
-        <form action="/">
+        <form action="/" onSubmit={handleSubmit}>
             <HeaderLayout
                 title="Add new student"
                 subtitle={kurasu?.name}
@@ -34,13 +57,23 @@ export default function ExamineeCreate() {
             <ContentLayout>
                 <Box padding={6} background="neutral0">
                     <Stack paddingBottom={6}>
-                        <TextInput label="Fullname" name="fullname" required />
+                        <NumberInput
+                            label="No"
+                            name="no"
+                            required={true}
+                            onValueChange={v => setNo(v)}
+                            value={no}
+                            error={errors.no}
+                        />
                     </Stack>
                     <Stack paddingBottom={6}>
-                        <TextInput label="Username" name="username" required />
+                        <TextInput label="Fullname" name="fullname" required error={errors.fullname} />
+                    </Stack>
+                    <Stack paddingBottom={6}>
+                        <TextInput label="Username" name="username" required error={errors.username} />
                     </Stack>
                     <Stack paddingBottom={2}>
-                        <TextInput label="Password" name="password" required />
+                        <TextInput label="Password" name="password" required error={errors.password} />
                     </Stack>
                 </Box>
             </ContentLayout>
