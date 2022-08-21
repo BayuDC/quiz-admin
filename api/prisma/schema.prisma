@@ -58,7 +58,7 @@ model Choice {
   correct    Boolean
   questionId Int     @map("question_id")
 
-  Question Question @relation(fields: [questionId], references: [id])
+  question Question @relation(fields: [questionId], references: [id])
 
   @@map("choices")
 }
