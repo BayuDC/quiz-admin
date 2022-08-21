@@ -12,6 +12,7 @@ fastify.register(require('./plugins/valid'));
 
 fastify.register(require('./routes/class'));
 fastify.register(require('./routes/student'));
+fastify.register(require('./routes/task'));
 fastify.get('/', () => ({
     message: 'Hello World',
 }));
